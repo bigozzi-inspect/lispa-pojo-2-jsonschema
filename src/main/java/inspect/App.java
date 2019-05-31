@@ -54,6 +54,13 @@ public final class App {
         schemaByClassNameMap.entrySet().forEach(schemaByClassNameEntry -> writeToFile(schemaByClassNameEntry.getKey(),
                 schemaByClassNameEntry.getValue()));
 
+        Reflections enumReflections = new Reflections("it.arubapec.esecurity.docflyenum", new SubTypesScanner(false));
+        Set<Class<?>> enumPojos = enumReflections.getSubTypesOf(Object.class);
+        Map<String, String> enumSchemaByClassNameMap = enumPojos.stream()
+                .collect(Collectors.toMap(Class::getName, pojo -> getSchema(mapper, schemaGen, pojo)));
+        enumSchemaByClassNameMap.entrySet().forEach(schemaByClassNameEntry -> writeToFile(schemaByClassNameEntry.getKey(),
+                schemaByClassNameEntry.getValue()));
+
     }
 
     private static void writeToFile(String pojoClassName, String pojoJsonSchema) {
