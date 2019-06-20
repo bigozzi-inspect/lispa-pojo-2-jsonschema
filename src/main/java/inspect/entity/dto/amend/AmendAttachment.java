@@ -15,12 +15,12 @@ public class AmendAttachment implements AmendFile {
 
 	static final long serialVersionUID = 20190606_1045L;
 
-	protected String filename;
-	protected String mimetype;
-	protected String impronta;
-	protected String oggetto;
-	protected Path filePath;
-	protected String identificativo;
+	private String filename;
+	private String mimetype;
+	private String impronta;
+	private String oggetto;
+	private Path filePath;
+	private String identificativo;
 
 	public String getDocHash(){
 		return FileHashUtils.extractHash(impronta);

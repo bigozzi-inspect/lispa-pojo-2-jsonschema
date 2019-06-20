@@ -13,9 +13,7 @@ public class AmendJson {
 
 	static final long serialVersionUID = 20190606_1241L;
 
-
-	//docId -> AmendDoc
-    protected TreeMap<String, AmendPdv> amendPdvs;
+	private TreeMap<String, AmendPdv> amendPdvs;
 
 
 

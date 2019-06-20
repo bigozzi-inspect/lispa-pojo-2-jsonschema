@@ -1,5 +1,6 @@
 package inspect.entity.dto.amend;
 
+import it.arubapec.esecurity.docflyenum.doc.DocSignStatus;
 import it.arubapec.esecurity.docflyenum.generic.HashType;
 import it.arubapec.esecurity.docflysharedapi.utils.FileHashUtils;
 import lombok.Data;
@@ -19,12 +20,13 @@ public class AmendDoc implements AmendFile {
 	/**
 	 * Dati in input
 	 */
-	protected String docHash;
-	protected String docFileName;
-    protected String amendedDocId;
-    protected Path filePath;
+	private String docHash;
+	private String docFileName;
+    private String amendedDocId;
+    private Path filePath;
+    private DocSignStatus signcheckoutcome;
 
-    protected List<AmendAttachment> attachments;
+	private List<AmendAttachment> attachments;
 
 	public String getDocHash(){
 		return FileHashUtils.extractHash(docHash);

@@ -1,18 +1,18 @@
 package inspect.entity.dto.amend;
 
 import it.arubapec.esecurity.docflycommon.service.ContextService;
-import it.arubapec.esecurity.docflydomain.entity.anag.Archive;
-import it.arubapec.esecurity.docflydomain.entity.anag.Mimetype;
-import it.arubapec.esecurity.docflydomain.entity.anag.User;
-import it.arubapec.esecurity.docflydomain.entity.anag.UserDocClass;
+import it.arubapec.esecurity.docflydomain.entity.anag.*;
 import it.arubapec.esecurity.docflydomain.entity.bucket.BucketConfig;
-import it.arubapec.esecurity.docflyenum.amendment.AmendmentType;
+import it.arubapec.esecurity.docflydomain.mongo.AmendmentPda;
+import it.arubapec.esecurity.docflyenum.amendment.UpdateType;
 import lombok.Data;
 import org.springframework.http.codec.multipart.FilePart;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Map;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 /**
  * Amend Doc DTO for validation and deposit steps
@@ -29,7 +29,7 @@ public class AmendPdaDto {
 	private ContextService contextService;
     private String userPdaId;
     private String updatedPdaId;
-    private AmendmentType updateType;
+    private UpdateType updateType;
     private String docHash;
     private FilePart docPayload;
     private Path docPayloadPath;
@@ -37,21 +37,27 @@ public class AmendPdaDto {
     private Path docAmendMetaPayloadPath;
     private Path bucketTmpStorage;
 
-	protected TreeMap<String, AmendPdv> amendPdvs;
+	private TreeMap<String, AmendPdv> amendPdvs;
 
-    protected BucketConfig bucketConfig;
-    protected User user;
-    protected Archive archive;
-    protected UserDocClass userDocClass;
-    protected List<Mimetype> mimetypes;
+	private AmendmentPda amendmentPda;
+    private BucketConfig bucketConfig;
+    private User user;
+	private User delegateUser;
+    private Archive archive;
+    private UserDocClass userDocClass;
+    private List<Mimetype> mimetypes;
 
-    protected Boolean signChecker;
-    protected List<String> payloadFiles;
+	private Boolean signChecker;
+	private List<String> payloadFiles;
 
-	protected Boolean isMultiple;
-
-	public boolean isMultiple(){
-		return isMultiple == null ? payloadFiles.size() > 1 : isMultiple;
+	public Map<String, Map<String, List<String>>> getErrors(){
+		return amendPdvs.values().stream()
+				.collect(Collectors.toMap(
+						AmendPdv::getNewPdvId,
+						AmendPdv::getErrors
+				));
 	}
+
+	private List<DocClassField> attachmentFieldList;
 
 }
