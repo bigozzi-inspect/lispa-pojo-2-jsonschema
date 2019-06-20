@@ -50,7 +50,7 @@ public final class App {
                 new SubTypesScanner(false));
         Set<Class<?>> pojos = reflections.getSubTypesOf(Object.class);
         Map<String, String> schemaByClassNameMap = pojos.stream()
-                .collect(Collectors.toMap(Class::getSimpleName, pojo -> getSchema(mapper, schemaGen, pojo)));
+                .collect(Collectors.toMap(pojo -> simpleNameOrName(pojo, pojos), pojo -> getSchema(mapper, schemaGen, pojo)));
         schemaByClassNameMap.entrySet().forEach(schemaByClassNameEntry -> writeToFile(schemaByClassNameEntry.getKey(),
                 schemaByClassNameEntry.getValue()));
 
@@ -61,6 +61,12 @@ public final class App {
         enumSchemaByClassNameMap.entrySet().forEach(schemaByClassNameEntry -> writeToFile(schemaByClassNameEntry.getKey(),
                 schemaByClassNameEntry.getValue()));
 
+    }
+
+    private static String simpleNameOrName(Class<?> clazz,  Set<Class<?>> pojos) {
+        return pojos.stream().anyMatch(pojo ->
+            !pojo.equals(clazz) && pojo.getSimpleName().equals(clazz.getSimpleName())
+        ) ? clazz.getName() : clazz.getSimpleName();
     }
 
     private static void writeToFile(String pojoClassName, String pojoJsonSchema) {
