@@ -1,5 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>inspect</groupId>
     <artifactId>lispa-pojo-2-jsonschema</artifactId>
@@ -10,21 +10,21 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
-<dependency>
- <groupId>com.fasterxml.jackson.core</groupId>
- <artifactId>jackson-databind</artifactId>
- <version>2.9.8</version>
-</dependency>
-<dependency>
- <groupId>com.fasterxml.jackson.module</groupId>
- <artifactId>jackson-module-jsonSchema</artifactId>
- <version>2.9.8</version>
-</dependency>
-<dependency>
- <groupId>org.reflections</groupId>
- <artifactId>reflections</artifactId>
- <version>0.9.11</version>
-</dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.9.8</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-jsonSchema</artifactId>
+            <version>2.9.8</version>
+        </dependency>
+        <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+            <version>0.9.11</version>
+        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -34,7 +34,7 @@
         <dependency>
             <groupId>it.arubapec.esecurity</groupId>
             <artifactId>docfly-shared-internal-api</artifactId>
-            <version>0.0.12</version>
+            <version>0.0.13</version>
         </dependency>
         <dependency>
             <groupId>it.arubapec.esecurity</groupId>

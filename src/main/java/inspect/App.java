@@ -45,7 +45,7 @@ public final class App {
 
         JsonSchemaGenerator schemaGen = new JsonSchemaGenerator(mapper);
 
-        Reflections reflections = new Reflections("inspect.entity", "it.arubapec.esecurity.docflysharedapi.domain",
+        Reflections reflections = new Reflections(/* "inspect.entity", */ "it.arubapec.esecurity.docflysharedapi.domain",
                 "it.arubapec.esecurity.docflydomain.dto.generic", "it.arubapec.esecurity.docflydomain.dto.archive",
                 new SubTypesScanner(false));
         Set<Class<?>> pojos = reflections.getSubTypesOf(Object.class);
